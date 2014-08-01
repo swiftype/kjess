@@ -9,4 +9,3 @@ pkg
 tmp
 kestrel
 Gemfile*
-*.gemspec
