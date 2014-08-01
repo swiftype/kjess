@@ -1,6 +1,5 @@
 require 'fcntl'
 require 'resolv'
-require 'resolv-replace'
 require 'kjess/error'
 require 'kjess/socket'
 
