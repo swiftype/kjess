@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.join(File.dirname(__FILE__), 'lib')
-require "kjess"
+require "kjess/version" # only the version: requiring the whole library here would load it before SimpleCov can track it
 
 Gem::Specification.new do |s|
   s.name        = "kjess"
@@ -16,9 +16,10 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_development_dependency 'json', '~> 1.7.6'
-  s.add_development_dependency 'minitest', '~> 4.5.0'
-  s.add_development_dependency 'rake', '~> 10.0.3'
-  s.add_development_dependency 'rdoc', '~> 3.12'
-  s.add_development_dependency 'zip', '~> 2.0.2'
+  # minitest 5.x still supports the `describe`/`must_equal` style the specs use (minitest 6 drops global expectations)
+  s.add_development_dependency 'minitest', '~> 5.15'
+  s.add_development_dependency 'rake', '>= 13'
+  s.add_development_dependency 'rspec', '~> 3.12' # for the rspec copies of the specs in rspec/
+  s.add_development_dependency 'rubyzip', '>= 2' # only for `rake kestrel:extract`
+  s.add_development_dependency 'simplecov'
 end

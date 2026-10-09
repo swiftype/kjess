@@ -5,6 +5,11 @@ module KJess
       File.expand_path( "..", ROOT )
     end
 
+    # The Kestrel version the specs expect from the server (override it when testing against another build)
+    def self.kestrel_version
+      ENV['KJESS_KESTREL_VERSION'] || '2.4.1'
+    end
+
     def self.memcache_port
       ENV['KJESS_MEMCACHE_PORT'] || 33122
     end
