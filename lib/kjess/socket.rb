@@ -223,6 +223,12 @@ module KJess
     #
     # Returning the socket if it is and raising an Error if it isn't.
     def connect_nonblock_finalize( sock, sockaddr )
+      # The socket becomes writable when the connect finished *or failed*. Look at the pending socket error first:
+      # repeating connect_nonblock is not a reliable way to find out (on MRI 3.x it can report EISCONN, i.e. success,
+      # for a refused connection, so a closed port was silently treated as connected).
+      pending_error = sock.getsockopt( ::Socket::SOL_SOCKET, ::Socket::SO_ERROR ).int
+      raise SystemCallError.new( nil, pending_error ) unless pending_error.zero?
+
       sock.connect_nonblock( sockaddr )
       return sock
     rescue Errno::EISCONN

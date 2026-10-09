@@ -8,4 +8,4 @@ log
 pkg
 tmp
 kestrel
-Gemfile*
+Gemfile.lock

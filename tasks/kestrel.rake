@@ -69,4 +69,5 @@ namespace :kestrel do
 end
 
 task :clean => 'kestrel:clean'
-task :test => KJess::Spec::KestrelServer.config_file
+# `rake test` no longer depends on unpacking and configuring a Kestrel here: the specs use whatever Kestrel is listening
+# on KJESS_MEMCACHE_PORT (see the Rakefile).
