@@ -75,11 +75,13 @@ Set `COVERAGE=1` to get a SimpleCov report for `rake test`.
         docker.elastic.co/swiftype/ci-base-el8 .buildkite/scripts/run-tests.sh mri    # or: jruby
 
   Run it on a copy of the repository if you do not want the container to write into your checkout.
-* **The pipeline itself is not defined in this repository.** Pipelines for `swiftype/*` repositories are registered in
-  Elastic's Buildkite separately (for example `swiftype-crawler-build` checks out `swiftype/crawler` using a GitHub token
-  from Vault), not through a file in the repo. For this repository a pipeline has to be created that points at
-  `swiftype/kjess` with `.buildkite/pipeline.yml` as its pipeline file; until that exists, none of the above runs on pull
-  requests.
+* **Where the pipeline is registered:** Buildkite pipelines for `swiftype/*` repositories are not created from a file in
+  the repository. They are defined by manifests in [elastic/terrazzo](https://github.com/elastic/terrazzo)
+  (`manifests/prod/buildkite/swiftype-*.yaml`), and each manifest points at the pipeline YAML in the codebase. For this
+  repository that is `manifests/prod/buildkite/swiftype-kjess.yaml` with `repository: swiftype/kjess` and
+  `pipeline_file: .buildkite/pipeline.yml` (modelled on `swiftype-crawler-build.yaml`). Adding or renaming a pipeline
+  step means changing `.buildkite/pipeline.yml` here; adding a new pipeline means a new terrazzo manifest. The Swiftype
+  SRE docs describe this in `docs/swiftype/infra-overview/ci.mdx`.
 
 ## ISC LICENSE
 
