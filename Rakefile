@@ -9,6 +9,12 @@ Rake::TestTask.new(:test) do |t|
   t.warning = false
 end
 
+# RSpec copies of the same specs (rspec/), kept for a possible future conversion; `rake test` stays the main suite
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:rspec) do |t|
+  t.pattern = 'rspec/**/*_spec.rb' # the task's default (spec/) would pick up the minitest files
+end
+
 task :default => :test
 
 # Optional helpers to download/start/stop a Kestrel for the specs
