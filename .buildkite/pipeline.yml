@@ -1,0 +1,9 @@
+agents:
+  image: "docker.elastic.co/swiftype/ci-base-el8"
+env:
+  LANG: "en_US.UTF-8"
+steps:
+  - label: "specs (MRI 3.2.8)"
+    command: .buildkite/scripts/run-tests.sh mri
+  - label: "specs (JRuby 9.4.14.0)"
+    command: .buildkite/scripts/run-tests.sh jruby

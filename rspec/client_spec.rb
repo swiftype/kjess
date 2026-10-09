@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe KJess::Client do
-  let(:client_version) { '2.4.1' }
+  let(:client_version) { KJess::Spec.kestrel_version }
   let(:client) { KJess::Spec.kjess_client }
 
   after { KJess::Spec.reset_server(client) }
