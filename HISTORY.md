@@ -1,4 +1,4 @@
-# KJess Changlog
+# KJess Changelog
 
 ## Version 1.2.1 - 2026-10-12
 
