@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe KJess::Client do
   before do
-    @client_version = "2.4.1"
+    @client_version = KJess::Spec.kestrel_version
     @client = KJess::Spec.kjess_client()
   end
 

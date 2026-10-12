@@ -27,8 +27,11 @@ easiest way to contribute.
 * Fork the [repo][].
 * Create a new branch for your issue: `git checkout -b issue/my-issue`
 * Lovingly craft your contribution:
-    * `rake develop` to get started, or if you prefer bundler `rake develop:using_bunder && bundle`.
-    * `rake test` to run tests
+    * `bundle install` to get started (Ruby 3.2.8 or JRuby 9.4.14.0).
+    * The specs talk to a real Kestrel 2.4.1 on `localhost:33122`. Start one there, or point the specs at a running
+      one with `KJESS_MEMCACHE_PORT=<memcache port>`. The specs flush every queue on that server, so do not use a
+      Kestrel that holds real data.
+    * `bundle exec rake test` to run tests
 * Make sure that `rake test` passes. Its important, I said it twice.
 * Add yourself to the contributors section below.
 * Submit your [pull request][].

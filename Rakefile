@@ -1,21 +1,22 @@
-# vim: syntax=ruby
-load 'tasks/this.rb'
+require 'bundler/gem_tasks'
+require 'rake/testtask'
 
-This.name     = "kjess"
-This.author   = "Jeremy Hinegardner"
-This.email    = "jeremy@copiousfreetime.org"
-This.homepage = "http://github.com/copiousfreetime/#{ This.name }"
-
-This.ruby_gemspec do |spec|
-  spec.add_development_dependency( 'rake'     , '~> 10.0.3')
-  spec.add_development_dependency( 'minitest' , '~> 4.5.0' )
-  spec.add_development_dependency( 'rdoc'     , '~> 3.12'  )
-  spec.add_development_dependency( 'zip'      , '~> 2.0.2' )
-  spec.add_development_dependency( 'json'     , '~> 1.7.6' )
+# The specs talk to a real Kestrel 2.4.1 on KJESS_MEMCACHE_PORT (default 33122): start one before running them.
+# (`rake kestrel:start` can unpack and start one if the download URL in tasks/kestrel.rake still works.)
+Rake::TestTask.new(:test) do |t|
+  t.libs = %w[lib spec .]
+  t.pattern = 'spec/**/*_spec.rb'
+  t.warning = false
 end
 
+# RSpec copies of the same specs (rspec/), kept for a possible future conversion; `rake test` stays the main suite
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:rspec) do |t|
+  t.pattern = 'rspec/**/*_spec.rb' # the task's default (spec/) would pick up the minitest files
+end
 
-load 'tasks/default.rake'
+task :default => :test
 
-$: << "." unless $:.include?(".")
+# Optional helpers to download/start/stop a Kestrel for the specs
+$LOAD_PATH << '.' unless $LOAD_PATH.include?('.')
 load 'tasks/kestrel.rake'

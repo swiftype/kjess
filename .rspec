@@ -1,0 +1,4 @@
+--default-path rspec
+-I rspec
+--require spec_helper
+--format documentation

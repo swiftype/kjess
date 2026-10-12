@@ -1,6 +1,4 @@
-module KJess
-  VERSION = "1.2.0"
-end
+require 'kjess/version'
 
 require 'kjess/connection'
 require 'kjess/stats_cache'
