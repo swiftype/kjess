@@ -1,4 +1,11 @@
-# KJess Changlog
+# KJess Changelog
+
+## Version 1.2.1 - 2026-10-12
+
+* Detect refused connections reliably on MRI 3.x: a connection to a port nobody listens on was reported as connected
+  (the pending socket error is now read with `SO_ERROR` before finishing the non-blocking connect)
+* The test suite runs on current Rubies (MRI 3.2, JRuby 9.4) and has a Gemfile, SimpleCov coverage (`COVERAGE=1`) and
+  RSpec copies of the specs (`rspec/`); the legacy test scaffolding was removed
 
 ## Version 1.2.0 - 2013-07-08
 
